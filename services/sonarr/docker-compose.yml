@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./config:/config
+      - ./tv:/tv
+    ports:
+      - "8989:8989"
+    networks:
+      - multimedia
+
+networks:
+  multimedia:
+    name: multimedia_network
+    external: true 

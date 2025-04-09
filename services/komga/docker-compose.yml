@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  komga:
+    image: gotson/komga:latest
+    container_name: komga
+    restart: unless-stopped
+    ports:
+      - "${KOMGA_PORT}:8080"
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - KOMGA_DATABASE=${KOMGA_DATABASE}
+      - KOMGA_LIBRARIES=${KOMGA_LIBRARIES}
+      - KOMGA_TEMP_DIR=${KOMGA_TEMP_DIR}
+      - KOMGA_LOG_LEVEL=${KOMGA_LOG_LEVEL}
+      - KOMGA_AUTH=${KOMGA_AUTH}
+      - KOMGA_ADMIN_USER=${KOMGA_ADMIN_USER}
+      - KOMGA_ADMIN_PASSWORD=${KOMGA_ADMIN_PASSWORD}
+    volumes:
+      - ${MANGAS_PATH}:/manga
+      - ./config:/config
+    networks:
+      - ${MULTIMEDIA_NETWORK}
+
+networks:
+  ${MULTIMEDIA_NETWORK}:
+    external: true 

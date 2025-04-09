@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./config:/config
+      - ./movies:/movies
+      - ./tv:/tv
+    ports:
+      - "6767:6767"
+    networks:
+      - multimedia
+
+networks:
+  multimedia:
+    name: multimedia_network
+    external: true 

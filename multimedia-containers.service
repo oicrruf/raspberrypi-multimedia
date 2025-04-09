@@ -1,0 +1,16 @@
+[Unit]
+Description=Multimedia Containers Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/multimedia
+ExecStart=/home/pi/multimedia/start_containers.sh
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target 

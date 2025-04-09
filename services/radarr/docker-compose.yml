@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./config:/config
+      - ./movies:/movies
+    ports:
+      - "7878:7878"
+    networks:
+      - multimedia
+
+networks:
+  multimedia:
+    name: multimedia_network
+    external: true 

@@ -1,0 +1,200 @@
+version: '3.8'
+
+services:
+  # Gestión de Torrents
+  transmission:
+    image: linuxserver/transmission:latest
+    container_name: transmission
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - USER=admin
+      - PASS=admin # Cambiar en producción
+    volumes:
+      - ./data/transmission/config:/config
+      - ./data/transmission/downloads:/downloads
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+    networks:
+      - multimedia
+
+  # Indexador de Torrents
+  jackett:
+    image: linuxserver/jackett:latest
+    container_name: jackett
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./data/jackett/config:/config
+      - ./data/jackett/downloads:/downloads
+    ports:
+      - "9117:9117"
+    networks:
+      - multimedia
+
+  # Gestión de Series
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./data/sonarr/config:/config
+      - ./data/sonarr/tv:/tv
+    ports:
+      - "8989:8989"
+    networks:
+      - multimedia
+
+  # Gestión de Películas
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./data/radarr/config:/config
+      - ./data/radarr/movies:/movies
+    ports:
+      - "7878:7878"
+    networks:
+      - multimedia
+
+  # Gestión de Música
+  lidarr:
+    image: linuxserver/lidarr:latest
+    container_name: lidarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./data/lidarr/config:/config
+      - ./data/lidarr/music:/music
+    ports:
+      - "8686:8686"
+    networks:
+      - multimedia
+
+  # Servidor de Medios
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - PLEX_CLAIM=${PLEX_CLAIM}
+    volumes:
+      - ${PLEX_CONFIG_PATH}:/config
+      - ${PLEX_TRANSCODE_PATH}:/transcode
+      - ${PLEX_MEDIA_PATH}:/data
+    networks:
+      - ${MULTIMEDIA_NETWORK}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plex.rule=Host(`plex.${DOMAIN}`)"
+      - "traefik.http.routers.plex.entrypoints=websecure"
+      - "traefik.http.routers.plex.tls=true"
+      - "traefik.http.routers.plex.tls.certresolver=myresolver"
+      - "traefik.http.services.plex.loadbalancer.server.port=32400"
+    ports:
+      - "32400:32400"
+      - "3005:3005"
+      - "8324:8324"
+      - "32469:32469"
+      - "1900:1900/udp"
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+
+  # Gestión de Indexadores
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./data/prowlarr/config:/config
+      - ./data/prowlarr/downloads:/downloads
+    ports:
+      - "9696:9696"
+    networks:
+      - multimedia
+
+  # Subtítulos
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./data/bazarr/config:/config
+      - ./data/bazarr/movies:/movies
+      - ./data/bazarr/tv:/tv
+    ports:
+      - "6767:6767"
+    networks:
+      - multimedia
+
+  # Monitoreo de Plex
+  tautulli:
+    image: linuxserver/tautulli:latest
+    container_name: tautulli
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./data/tautulli/config:/config
+    ports:
+      - "8181:8181"
+    networks:
+      - multimedia
+
+  # Solicitudes de Contenido
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: overseerr
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - LOG_LEVEL=debug
+    volumes:
+      - ./data/overseerr/config:/app/config
+    ports:
+      - "5055:5055"
+    networks:
+      - multimedia
+
+networks:
+  multimedia:
+    name: multimedia_network
+    driver: bridge
+  default:
+    name: raspberry_network
+    driver: bridge
+
+${MULTIMEDIA_NETWORK}:
+  external: true 
