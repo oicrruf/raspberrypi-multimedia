@@ -20,7 +20,7 @@ services:
       - "51413:51413"
       - "51413:51413/udp"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Indexador de Torrents
   jackett:
@@ -37,7 +37,7 @@ services:
     ports:
       - "9117:9117"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Gestión de Series
   sonarr:
@@ -54,7 +54,7 @@ services:
     ports:
       - "8989:8989"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Gestión de Películas
   radarr:
@@ -71,7 +71,7 @@ services:
     ports:
       - "7878:7878"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Gestión de Música
   lidarr:
@@ -88,7 +88,7 @@ services:
     ports:
       - "8686:8686"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Servidor de Medios
   plex:
@@ -103,7 +103,7 @@ services:
       - ${PLEX_TRANSCODE_PATH}:/transcode
       - ${PLEX_MEDIA_PATH}:/data
     networks:
-      - ${MULTIMEDIA_NETWORK}
+      - multimedia_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.plex.rule=Host(`plex.${DOMAIN}`)"
@@ -137,7 +137,7 @@ services:
     ports:
       - "9696:9696"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Subtítulos
   bazarr:
@@ -155,7 +155,7 @@ services:
     ports:
       - "6767:6767"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Monitoreo de Plex
   tautulli:
@@ -171,7 +171,7 @@ services:
     ports:
       - "8181:8181"
     networks:
-      - multimedia
+      - multimedia_network
 
   # Solicitudes de Contenido
   overseerr:
@@ -186,15 +186,10 @@ services:
     ports:
       - "5055:5055"
     networks:
-      - multimedia
+      - multimedia_network
 
 networks:
-  multimedia:
-    name: multimedia_network
-    driver: bridge
-  default:
-    name: raspberry_network
-    driver: bridge
-
-${MULTIMEDIA_NETWORK}:
-  external: true 
+  multimedia_network:
+    external: true
+  raspberry_network:
+    external: true 

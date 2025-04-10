@@ -1,0 +1,12 @@
+2025-04-10 07:07:52 - \033[0;32mIniciando contenedores multimedia...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio transmission no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio jackett no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio sonarr no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio radarr no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio lidarr no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio plex no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio prowlarr no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio bazarr no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio tautulli no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[1;33mEl directorio overseerr no existe, saltando...\033[0m
+2025-04-10 07:07:52 - \033[0;32mTodos los contenedores han sido iniciados\033[0m

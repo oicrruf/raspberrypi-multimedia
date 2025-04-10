@@ -7,8 +7,11 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Directorio base
-BASE_DIR="$HOME/multimedia"
-LOG_FILE="/var/log/multimedia-containers.log"
+BASE_DIR="$(dirname "$(readlink -f "$0")")"
+LOG_FILE="$BASE_DIR/logs/multimedia-containers.log"
+
+# Crear directorio de logs si no existe
+mkdir -p "$(dirname "$LOG_FILE")"
 
 # Función para registrar logs
 log() {
@@ -56,6 +59,8 @@ for service in "${SERVICES[@]}"; do
         else
             log "${RED}Error al iniciar $service${NC}"
         fi
+    else
+        log "${YELLOW}El directorio $service no existe, saltando...${NC}"
     fi
 done
 
