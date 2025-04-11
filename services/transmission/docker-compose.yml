@@ -12,8 +12,9 @@ services:
       - USER=${TRANSMISSION_USER}
       - PASS=${TRANSMISSION_PASS}
     volumes:
-      - ./config:/config
-      - ./downloads:/downloads
+      - /data/transmission/config:/config
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/complete:/downloads/complete
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/incomplete:/downloads/incomplete
     ports:
       - "9091:9091"
       - "51413:51413"

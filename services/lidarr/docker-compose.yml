@@ -12,6 +12,9 @@ services:
     volumes:
       - ./config:/config
       - ./music:/music
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/complete/lidarr:/downloads/complete/lidarr
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/incomplete/lidarr:/downloads/incomplete/lidarr
+
     ports:
       - "8686:8686"
     networks:

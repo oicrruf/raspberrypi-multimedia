@@ -10,9 +10,11 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
     volumes:
-      - ./config:/config
-      - ./transcode:/transcode
-      - ./media:/media
+      - /data/plex/config:/config
+      - /data/plex/transcode:/transcode
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/complete/lidarr:/media/music
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/complete/sonarr:/media/tv
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/complete/radarr:/media/movies
     ports:
       - "32400:32400"
       - "3005:3005"

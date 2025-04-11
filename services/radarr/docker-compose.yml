@@ -12,6 +12,8 @@ services:
     volumes:
       - ./config:/config
       - ./movies:/movies
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/complete/radarr:/downloads/complete/radarr
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/incomplete/radarr:/downloads/incomplete/radarr
     ports:
       - "7878:7878"
     networks:

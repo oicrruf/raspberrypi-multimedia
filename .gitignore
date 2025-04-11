@@ -1,2 +1,19 @@
 .env
 data/
+**/MediaCover/**
+**/MediaCover/*
+services/*/config/MediaCover/**
+services/*/config/MediaCover/*
+
+# Archivos de base de datos
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.pid
+
+# Archivos de logs
+**/logs/*.txt
+**/logs/*.log
+**/logs.db
+**/logs.db-shm
+**/logs.db-wal

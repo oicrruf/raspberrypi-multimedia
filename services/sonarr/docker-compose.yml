@@ -12,6 +12,8 @@ services:
     volumes:
       - ./config:/config
       - ./tv:/tv
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/complete/sonarr:/downloads/complete/sonarr
+      - /home/oicrruf/raspberrypi-multimedia/data/transmission/downloads/incomplete/sonarr:/downloads/incomplete/sonarr
     ports:
       - "8989:8989"
     networks:

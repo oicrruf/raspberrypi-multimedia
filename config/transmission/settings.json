@@ -12,7 +12,7 @@
     "blocklist-url": "http://www.example.com/blocklist",
     "cache-size-mb": 4,
     "dht-enabled": true,
-    "download-dir": "/downloads",
+    "download-dir": "/downloads/complete",
     "download-limit": 100,
     "download-limit-enabled": false,
     "download-queue-enabled": true,
