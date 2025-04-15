@@ -1,9 +1,44 @@
-.env
+# Logs
+*.log
+logs/
+**/logs/
+
+# Archivos temporales
+*.tmp
+*.swp
+*.bak
+*.cache
+
+# Directorios de configuración
 data/
-**/MediaCover/**
-**/MediaCover/*
-services/*/config/MediaCover/**
-services/*/config/MediaCover/*
+config/
+**/config/*.xml
+**/config/*.json
+**/config/*.pid
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno
+.env
+.env.*
+
+# Directorios de dependencias
+node_modules/
+venv/
+__pycache__/
+*.pyc
+
+# Archivos de IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Archivos de respaldo
+*.bak
+*.backup
 
 # Archivos de base de datos
 **/*.db
@@ -11,9 +46,8 @@ services/*/config/MediaCover/*
 **/*.db-wal
 **/*.pid
 
-# Archivos de logs
-**/logs/*.txt
-**/logs/*.log
-**/logs.db
-**/logs.db-shm
-**/logs.db-wal
+# Carpetas de medios
+services/radarr/movies/
+services/sonarr/tv/
+services/lidarr/music/
+services/plex/media/
