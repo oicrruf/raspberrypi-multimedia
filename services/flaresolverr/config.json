@@ -1,0 +1,13 @@
+{
+  "port": 8191,
+  "logLevel": "info",
+  "logHtml": false,
+  "capSolver": {
+    "apiKey": ""
+  },
+  "proxy": {
+    "url": "",
+    "username": "",
+    "password": ""
+  }
+} 

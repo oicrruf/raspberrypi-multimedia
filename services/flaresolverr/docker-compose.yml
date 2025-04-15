@@ -1,0 +1,21 @@
+version: '3'
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=America/El_Salvador
+    volumes:
+      - ./config.json:/app/config.json
+    ports:
+      - "8191:8191"
+    restart: unless-stopped
+    networks:
+      - multimedia_network
+
+networks:
+  multimedia_network:
+    external: true 

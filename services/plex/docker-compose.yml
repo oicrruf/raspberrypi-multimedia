@@ -9,6 +9,10 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+      - VIRTUAL_HOST=${DOMAIN}
+      - VIRTUAL_PORT=32400
+      - LETSENCRYPT_HOST=${DOMAIN}
+      - LETSENCRYPT_EMAIL=${TRAEFIK_EMAIL}
     volumes:
       - /data/plex/config:/config
       - /data/plex/transcode:/transcode
@@ -26,9 +30,11 @@ services:
       - "32413:32413/udp"
       - "32414:32414/udp"
     networks:
-      - multimedia
+      - multimedia_network
+      - raspberry_network
 
 networks:
-  multimedia:
-    name: multimedia_network
+  multimedia_network:
+    external: true
+  raspberry_network:
     external: true 
